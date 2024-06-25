@@ -70,4 +70,4 @@
 
 ### Bonus level
 - [ ] Maintain separate reducer - create and manage a separate reducer for storing the details of the currently edited user.
-- [ ] Add Confirmation for Deletion - implement a confirmation dialog that asks for user approval before deleting a user entry.
+- [x] Add Confirmation for Deletion - implement a confirmation dialog that asks for user approval before deleting a user entry.
