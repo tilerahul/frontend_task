@@ -28,3 +28,20 @@ export const addUser = (payload) => async dispatch => {
     console.log(e);
   }
 };
+
+export const deleteUser = (id) => async dispatch => {
+  try {
+    const response = await fetch(`http://example.com/user/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
+    const parsedResponse = await response.json();
+    if (parsedResponse.success) {
+      dispatch(getUsers());
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};

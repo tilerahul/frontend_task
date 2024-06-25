@@ -3,7 +3,7 @@ import InputHandler from "./commonInput";
 import SimpleTable from "./simpleTable";
 
 function MainComponent(props) {
-  const { getUsers, userState, addUser } = props;
+  const { getUsers, userState, addUser, deleteUser } = props;
 
   const handleSubmit = ({ name, email }) => {
     addUser({ name, email });
@@ -15,7 +15,7 @@ function MainComponent(props) {
   return (
     <div id="main-container-wrapper">
       <InputHandler onSubmit={handleSubmit} />
-      <SimpleTable dataSource={userState.users} />
+      <SimpleTable dataSource={userState.users} deleteUser={deleteUser}/>
     </div>
   );
 }
