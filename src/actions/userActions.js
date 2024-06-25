@@ -45,3 +45,22 @@ export const deleteUser = (id) => async dispatch => {
     console.log(e);
   }
 };
+
+export const editUser = (id, payload) => async dispatch => {
+  try {
+    const response = await fetch(`http://example.com/user/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(payload),
+      headers: {
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    });
+    const parsedResponse = await response.json();
+    if (parsedResponse.success) {
+      dispatch(getUsers());
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+

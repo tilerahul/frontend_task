@@ -3,7 +3,7 @@ import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { message } from "antd";
 
-const SimpleTable = ({ dataSource, deleteUser }) => {
+const SimpleTable = ({ dataSource, deleteUser, handleEdit }) => {
   return (
     <>
       <div>
@@ -39,7 +39,7 @@ const SimpleTable = ({ dataSource, deleteUser }) => {
                         {user.email}
                       </td>
                       <td class="flex justify-around px-6 py-4">
-                        <FaEdit className="text-blue-500 cursor-pointer" />
+                        <FaEdit onClick={()=>handleEdit(user)} className="text-blue-500 cursor-pointer" />
                         <MdDelete onClick={()=>{
                           deleteUser(user.id)
                           message.success('User Deleted Successfully !!!')

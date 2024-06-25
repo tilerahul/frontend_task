@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Input, Button, Form, Typography, message } from 'antd';
 
 const { Title } = Typography;
 
-const InputHandler = ({ onSubmit, editMode = false }) => {
+const InputHandler = ({ onSubmit, user, editMode = false }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
+  useEffect(()=>{
+    if(editMode){
+      setName('');
+      setEmail('');
+    }
+  }, [editMode])
 
   const handleSubmit = () => {
     if (!name || !email) {
@@ -13,9 +20,6 @@ const InputHandler = ({ onSubmit, editMode = false }) => {
       return;
     }
     onSubmit({ name, email });
-    setName('');
-    setEmail('');
-    message.success('User Added Successfully!');
   };
 
   return (

@@ -62,7 +62,7 @@
 
 ### Level 4
 - Add edit functionality:
-	- [ ] Edit for Each User: Implement a edit feature for each user entry
+	- [x] Edit for Each User: Implement a edit feature for each user entry
 
 ![image](https://github.com/impressai/frontend_task/assets/28563570/67fd80fc-c022-41b3-8f01-de11de046379)
 
