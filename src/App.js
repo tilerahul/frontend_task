@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "../node_modules/antd/dist/antd.css";
 import MainComponent from "./components/mainComponent";
 import { addUser, getUsers } from "./actions/userActions";
+import 'antd/dist/antd.css';
 
 function App(props) {
   return (
