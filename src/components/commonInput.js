@@ -7,12 +7,18 @@ const InputHandler = ({ onSubmit, user, editMode = false }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
-  useEffect(()=>{
-    if(editMode){
-      setName('');
-      setEmail('');
+  const [form] = Form.useForm();
+
+  useEffect(() => {
+    if (editMode && user) {
+      form.setFieldsValue({
+        name: user.name,
+        email: user.email,
+      });
+    } else {
+      form.resetFields();
     }
-  }, [editMode])
+  }, [editMode, user, form]);
 
   const handleSubmit = () => {
     if (!name || !email) {
@@ -20,6 +26,7 @@ const InputHandler = ({ onSubmit, user, editMode = false }) => {
       return;
     }
     onSubmit({ name, email });
+    form.resetFields();
   };
 
   return (
