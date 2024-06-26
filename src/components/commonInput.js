@@ -4,29 +4,31 @@ import { Input, Button, Form, Typography, message } from 'antd';
 const { Title } = Typography;
 
 const InputHandler = ({ onSubmit, user, editMode = false }) => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-
-  const [form] = Form.useForm();
+  const [formData, setFormData] = useState({ name: '', email: '' });
 
   useEffect(() => {
     if (editMode && user) {
-      form.setFieldsValue({
-        name: user.name,
-        email: user.email,
-      });
+      setFormData({ name: user.name, email: user.email });
     } else {
-      form.resetFields();
+      setFormData({ name: '', email: '' });
     }
-  }, [editMode, user, form]);
+  }, [editMode, user]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = () => {
-    if (!name || !email) {
+    if (!formData.name || !formData.email) {
       message.error('Please fill in both fields');
       return;
     }
-    onSubmit({ name, email });
-    form.resetFields();
+    onSubmit(formData);
+    setFormData({ name: '', email: '' });
   };
 
   return (
@@ -44,26 +46,28 @@ const InputHandler = ({ onSubmit, user, editMode = false }) => {
                 rules={[{ required: true, message: 'Please enter your name' }]}
               >
                 <Input
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  name="name"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   placeholder="Enter your name"
                 />
               </Form.Item>
               <Form.Item
                 label="Email"
                 name="email"
-                rules={[{message: 'Please enter your email', required:'true' }]}
+                rules={[{ required: true, message: 'Please enter your email' }]}
               >
                 <Input
                   type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   placeholder="Enter your email"
                 />
               </Form.Item>
               <Form.Item>
                 <Button type="primary" htmlType="submit" block>
-                  {!!editMode ? 'Edit user' : 'Add user'}
+                  {editMode ? 'Edit User' : 'Add User'}
                 </Button>
               </Form.Item>
             </Form>

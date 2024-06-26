@@ -10,21 +10,23 @@ function MainComponent(props) {
   const [currentUser, setCurrentUser] = useState(null);
 
   const handleSubmit = ({ name, email }) => {
-    if(editMode){
-      editUser(currentUser.id, {name, email});
+    if (editMode) {
+      editUser(currentUser.id, { name, email });
       setEditMode(false);
       setCurrentUser(null);
-      message.success('User Details Updated !!!');
-    }else{
+      message.success("User Details Updated !!!");
+    } else {
       addUser({ name, email });
-      message.success('User Added Successfully !!!')
+      message.success("User Added Successfully !!!");
     }
   };
+
   useEffect(() => {
     getUsers();
   }, []);
 
   const handleEdit = (user) => {
+    alert('Make Your Changes in Input Field')
     setCurrentUser(user);
     setEditMode(true);
   };
@@ -32,7 +34,7 @@ function MainComponent(props) {
   return (
     <div id="main-container-wrapper">
       <InputHandler onSubmit={handleSubmit} user={currentUser} editMode={editMode} />
-      <SimpleTable dataSource={userState.users} deleteUser={deleteUser} handleEdit={handleEdit}/>
+      <SimpleTable dataSource={userState.users} deleteUser={deleteUser} handleEdit={handleEdit} />
     </div>
   );
 }
